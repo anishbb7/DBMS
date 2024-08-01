@@ -1,0 +1,26 @@
+use users;
+db.createCollection("users");
+db.users.insertOne({ name: "John Doe", age: 30, email: "john@example.com" }); 
+db.users.insertMany([ 
+{ name: "Alice Smith", age: 25, email: "alice@example.com" }, 
+{ name: "Bob Johnson", age: 35, email: "bob@example.com" } 
+]); 
+
+db.users.find();
+
+db.users.find({ age: { $gte: 30 } });
+db.users.findOne({ email: "john@example.com" });
+
+db.users.updateOne( 
+{ name: "Alice Smith" }, 
+{ $set: { age: 26 } } 
+); 
+
+db.users.updateMany( 
+{ age: { $gte: 30 } }, 
+{ $set: { status: "senior" } } 
+);
+
+db.users.deleteOne({ name: "Bob Johnson" }); 
+
+db.users.deleteMany({ age: { $lt: 25 } });
